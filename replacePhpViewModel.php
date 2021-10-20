@@ -35,13 +35,13 @@ $toDoList = [
 <body>
 <h1>Vue.js入門 ～ToDoアプリ編～</h1>
 <div id="entryApp">
-    <div class="user-name">ようこそ {{userLastName + ' ' + userFirstName}} さん</div>
-    <div class="to-do-item" v-for="(toDoItem, key) of toDoList" :key="key" @dblclick="switchIsDone(key)">
+    <div class="user-name">ようこそ {{userFullName}} さん</div>
+    <div class="to-do-item" v-for="(toDoItem, key) of toDoList" :key="key" @dblclick="switchIsDone(key);">
         <div>
             題名：{{toDoItem.title}}
             <span class="notice-is-done" v-if="toDoItem.isDone">完了</span>
         </div>
-        <div>～{{toDoItem.tilTime}}</div>
+        <div>{{displayTilTime(key)}}</div>
         <div>
             備考：<div>{{toDoItem.info}}</div>
         </div>
@@ -61,6 +61,21 @@ $toDoList = [
             switchIsDone: function (key) {
                 this.toDoList[key].isDone = ! this.toDoList[key].isDone;
             }
+        },
+        computed: {
+            userFullName: {
+                get: function () {
+                    return this.userLastName + ' ' + this.userFirstName;
+                }
+            },
+            displayTilTime: {
+                get: function () {
+                    return function (key) {
+                        let time = new Date(this.toDoList[key].tilTime);
+                        return '～' + time.getFullYear() + '年' + (time.getMonth() + 1).toString() + '月' + time.getDate() + '日' + time.getHours() + '時' + time.getMinutes() + '分';
+                    }
+                }
+            },
         }
     })
 </script>
