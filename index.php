@@ -34,6 +34,7 @@ $toDoList = [
 </head>
 <body>
 <h1>Vue.js入門 ～ToDoアプリ編～</h1>
+
 <div id="entryApp">
     <div class="user-name">ようこそ {{userLastName + ' ' + userFirstName}} さん</div>
     <div class="to-do-item">
@@ -58,11 +59,19 @@ $toDoList = [
         </div>
     </div>
 </div>
+
+</body>
+<body>
+    <div id="app"></div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script>
     const entryApp = new Vue({
-        el: '#entryApp',
+
+        // このVueインスタンスがマウントする要素
+        el: '#app',
+
+        // このVueインスタンスで扱うデータ
         data: {
             userFirstName: '<?php echo($user_first_name) ?>',
             userLastName: '<?php echo($user_last_name) ?>',

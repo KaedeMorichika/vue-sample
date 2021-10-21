@@ -5,6 +5,7 @@
     border-radius: 5px;
     width: fit-content;
     min-width: 800px;
+    position: relative;
 }
 .to-do-item:hover {
     cursor: pointer;
@@ -12,4 +13,12 @@
 }
 .notice-is-done {
     color: green;
+}
+.delete-item {
+    font-weight: bold;
+    color: red;
+    position: absolute;
+    left: 830px;
+    bottom: 35px;
+    font-size: 1.5rem;
 }

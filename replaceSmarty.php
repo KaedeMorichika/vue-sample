@@ -34,11 +34,14 @@ $toDoList = [
 </head>
 <body>
 <h1>Vue.js入門 ～ToDoアプリ編～</h1>
+
 <div id="entryApp">
     <div class="user-name">ようこそ {{userLastName + ' ' + userFirstName}} さん</div>
+    <!-- Smartyの{foreach}{/foreach}を置き換え -->
     <div class="to-do-item" v-for="(toDoItem, key) of toDoList" :key="key">
         <div>
             題名：{{toDoItem.title}}
+            <!-- Smartyの{if}{/if}を置き換え -->
             <span class="notice-is-done" v-if="toDoItem.isDone">完了</span>
         </div>
         <div>～{{toDoItem.tilTime}}</div>
@@ -47,6 +50,7 @@ $toDoList = [
         </div>
     </div>
 </div>
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script>

@@ -34,9 +34,10 @@ $toDoList = [
 </head>
 <body>
 <h1>Vue.js入門 ～ToDoアプリ編～</h1>
+
 <div id="entryApp">
     <div class="user-name">ようこそ {{userLastName + ' ' + userFirstName}} さん</div>
-    <div class="to-do-item" v-for="(toDoItem, key) of toDoList" :key="key" @dblclick="switchIsDone(key)">
+    <div class="to-do-item" v-for="(toDoItem, key) of toDoList" :key="key" @dblclick="switchIsDone(key)" v-if="toDoItem.deleteFlag !== true">
         <div>
             題名：{{toDoItem.title}}
             <span class="notice-is-done" v-if="toDoItem.isDone">完了</span>
@@ -45,8 +46,10 @@ $toDoList = [
         <div>
             備考：<div>{{toDoItem.info}}</div>
         </div>
+        <div class="delete-item" @click="deleteItem(key)">×</div>
     </div>
 </div>
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script>
@@ -57,9 +60,13 @@ $toDoList = [
             userLastName: '<?php echo($user_last_name) ?>',
             toDoList: <?php echo(json_encode($toDoList)); ?>
         },
+        // DOMへのイベントリスナー登録を置き換え
         methods: {
             switchIsDone: function (key) {
                 this.toDoList[key].isDone = ! this.toDoList[key].isDone;
+            },
+            deleteItem: function (key) {
+                this.$set(this.toDoList[key], 'deleteFlag', true);
             }
         }
     })

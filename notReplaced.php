@@ -45,10 +45,11 @@ foreach ($toDoList as $key => $toDoItem) {
 </head>
 <body>
 <h1>Vue.js入門 ～ToDoアプリ編～</h1>
+
 <div id="entryApp">
     <div class="user-name">ようこそ {$toDoAppViewModel.user_full_name} さん</div>
     {foreach from=$toDoAppViewModel.toDoListViewModel item="toDoItemViewModel" key="key"}
-    <div class="to-do-item" data-key="key">
+    <div id="toDoItem{$key}" class="to-do-item" data-key="key">
         <div>
             題名：{$toDoItemViewModel.title}
             {if $toDoItemViewModel.isDone}
@@ -61,9 +62,11 @@ foreach ($toDoList as $key => $toDoItem) {
         <div>
             備考：<div>{$toDoItemViewModel.info}</div>
         </div>
+        <div class="delete-item" data-key="key">×</div>
     </div>
     {/foreach}
 </div>
+
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script>
@@ -82,7 +85,12 @@ foreach ($toDoList as $key => $toDoItem) {
                 $('#noticeIsDone'+key).css('display', 'inline-block');
                 toDoList[key]['isDone'] = true; // ※ViewModelは変更されない
             }
-        })
+        });
+        $('.delete-item').on('click', function () {
+            let key = $(this).data('key');
+            $('toDoItem'+key).css('display', 'none');
+            toDoList[key]['deleteFlag'] = true;
+        });
     });
 
     /**
