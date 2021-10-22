@@ -37,6 +37,7 @@ $toDoList = [
 
 <div id="entryApp">
     <div class="user-name">ようこそ {{userFullName}} さん</div>
+    <div class="user-name">ようこそ <input type="text" v-model="userFullName"> さん</div>
     <div class="to-do-item" v-for="(toDoItem, key) of toDoList" :key="key" @dblclick="switchIsDone(key)" v-if="toDoItem.deleteFlag !== true">
         <div>
             題名：{{toDoItem.title}}
@@ -73,6 +74,9 @@ $toDoList = [
             userFullName: {
                 get: function () {
                     return this.userLastName + ' ' + this.userFirstName;
+                },
+                set: function (newValue) {
+                    console.log(newValue);
                 }
             },
             displayTilTime: {
